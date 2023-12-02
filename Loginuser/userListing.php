@@ -166,10 +166,11 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
             ?>
                 <td class="Action">
                     <a class="Edit" href="updateUserInfoIndex.php?id=<?php echo $userData['id']; ?>">Update</a>
-                    <a class="Delete" href="delete.php?id=<?php echo $userData['id']; ?>" onclick="return confirm('Are you sure to Delete ?')">Delete</a>
+                    <a class="Delete" href="Admin/removeUser.php?id=<?php echo $userData['id']; ?>" onclick="return confirm('Are you sure to Delete ?')">Delete</a>
                 </td>
             <?php
             }
+
             ?>
 
         </tbody>

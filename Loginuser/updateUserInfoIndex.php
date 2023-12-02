@@ -59,18 +59,6 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
 
 <body>
     <div class="message">
-        <?PHP
-        $id = $_GET['id'];
-        echo $id;
-        die;
-        // $userData = $GetDataClass->find($id);
-        // print_r($userData);
-        // foreach ($userData as $key => $item) {
-        // 
-        ?>
-        // <?php
-            // }
-            ?>
         <?php
         if ($newSession->hasError()) {
             echo $newSession->getError();
@@ -80,27 +68,31 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
             echo $newSession->getMessage();
             $newSession->removeMessage();
         }
+        $id = $_GET['id'];
+        $userData = $GetDataClass->find($id);
         ?>
     </div>
-    <form id="loginPage" action="userDataSubmit.php" method="post">
+    <form id="loginPage" action="updateUserInfroSubmit.php" method="post">
         <div>Register Here</div>
+        <input class="input_field" type="hidden" name="id" id="user" value="<?php echo $userData['id']; ?>">
         <div>First_Name :
-            <input class="input_field" type="hidden" name="firstName" id="user" placeholder="First name" value="">
-        </div><br>
-
-        <div>First_Name :
-            <input class="input_field" type="text" name="firstName" id="user" placeholder="First name" value="">
+            <input class="input_field" type="text" name="firstName" id="user" value="<?php echo $userData['name']; ?>">
         </div><br>
         <div>Email :
-            <input class="input_field" type="text" name="email" id="user" placeholder="email" value="">
+            <input class="input_field" type="text" name="email" id="user" placeholder="email" value="<?php echo $userData['email']; ?>">
         </div><br>
         <div>Password :
-            <input class="input_field" type="password" name="password" id="password" placeholder="password" value="">
+            <input class="input_field" type="password" name="password" id="password" placeholder="password" value="<?php echo $userData['password']; ?>">
+            <input class="input_field" type="hidden" name="status" placeholder="password" value="<?php echo $userData['status']; ?>">
         </div><br>
         <div>
             <button class="submit_btn" type="submit" name="submit" id="submit" value="submit">submit</button>
         </div>
     </form>
+
+    <?php
+
+    ?>
 </body>
 
 </html>
