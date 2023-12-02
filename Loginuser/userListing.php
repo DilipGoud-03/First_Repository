@@ -129,27 +129,23 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
         </div>
     </nav>
     <h2>User Listing Table</h2>
-    <?php
-    if ($newSession->hasError()) {
-        echo $newSession->getError();
-        $newSession->removeError();
-    }
-    if ($newSession->hasMessage()) {
-        echo $newSession->getMessage();
-        $newSession->removeMessage();
-    }
-    ?>
+    <h2>
+        <?php
+        if ($newSession->hasError()) {
+            echo $newSession->getError();
+            $newSession->removeError();
+        }
+        if ($newSession->hasMessage()) {
+            echo $newSession->getMessage();
+            $newSession->removeMessage();
+        }
+        ?>
 
-    <?php
-    $myData = file_get_contents(dirname(__DIR__) . '/Handdler/JsonData/data.json');
-    $myObject = json_decode($myData, true);
-
-
-    ?>
+    </h2>
     <table id="table" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>S.No.</th>
+                <th>Id</th>
                 <th>First Name</th>
                 <th>Email</th>
                 <th>Password</th>
@@ -159,31 +155,26 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
         </thead>
         <tbody>
             <?PHP
-            $row = 1;
-            foreach ($myObject as $key => $item) {
-                echo "<tr>";
-                echo " <td>{$row}</td>";
-                $row++;
+            $email = $_GET['email'];
+            $userData = $GetDataClass->findByEmail($email);
+            foreach ($userData as $key => $item) {
             ?>
-                <td><?php echo $myObject[$key]['name']; ?></td>
-                <td><?php echo $myObject[$key]['email']; ?></td>
-                <td><?php echo $myObject[$key]['password']; ?></td>
-                <td><?php echo $myObject[$key]['status']; ?></td>
-                <?php
-                if (!empty($myObject)) {
-                ?>
-                    <td class="Action">
-                        <a class="Edit" href="updateUserInfro.php?id=<?php echo $myObject[$key]['id']; ?>">Update</a>
-                        <a class="Delete" href="delete.php?id=<?php echo $myObject[$key]['id']; ?>" onclick="return confirm('Are you sure to Delete ?')">Delete</a>
-                    </td>
+                <td><?php echo $userData[$key]; ?></td>
             <?php
-                }
-                echo "</tr>";
+            }
+            if (!empty($userData)) {
+            ?>
+                <td class="Action">
+                    <a class="Edit" href="updateUserInfoIndex.php?id=<?php echo $userData['id']; ?>">Update</a>
+                    <a class="Delete" href="delete.php?id=<?php echo $userData['id']; ?>" onclick="return confirm('Are you sure to Delete ?')">Delete</a>
+                </td>
+            <?php
             }
             ?>
 
         </tbody>
     </table>
+
     <button type="submit" class="back"><a href="dashboard.php">Back</a></button>
 </body>
 

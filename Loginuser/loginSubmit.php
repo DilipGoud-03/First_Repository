@@ -32,9 +32,10 @@ if ($GetDataClass->loginUser([
     'email' => $email,
     'password' => $password,
 ])) {
+
     $newSession->setAuthId(1);
     $newSession->setMessage('Login successful');
-    header("Location: dashboard.php");
+    header("Location: dashboard.php?email=$email");
     exit();
 }
 $newSession->setError('Invalid email or password ');
