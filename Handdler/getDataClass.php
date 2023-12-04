@@ -46,10 +46,8 @@ class GetDataClass
             if ($row['id'] == $id) {
                 return true;
             }
-
             return false;
         }));
-
         if (!empty($result[0])) {
             return $result[0];
         }

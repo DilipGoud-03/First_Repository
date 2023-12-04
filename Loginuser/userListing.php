@@ -170,7 +170,6 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
                 </td>
             <?php
             }
-
             ?>
 
         </tbody>

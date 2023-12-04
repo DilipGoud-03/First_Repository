@@ -35,7 +35,7 @@ if ($GetDataClass->updateUser($id, [
     'status' => $status,
 ])) {
     $newSession->setMessage('Upadate successful');
-    header("Location:userListing.php?email=$email");
+    header("Location:userListing.php");
     exit();
 }
 $newSession->setError('Invalid email or password ');

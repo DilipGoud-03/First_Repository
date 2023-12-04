@@ -176,6 +176,7 @@ if (!$newSession->isAuthExists()) {
                 if (($myObject)) {
                 ?>
                     <td class="Action">
+                        <a class="Edit" href="updateUserInfoIndex.php?id=<?php echo $myObject[$key]['id']; ?>">Update</a>
                         <a class="Delete" href="removeUser.php?id=<?php echo $myObject[$key]['id']; ?>">Delete</a>
                     </td>
             <?php
