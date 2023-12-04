@@ -4,7 +4,7 @@ session_start();
 require_once(dirname(__DIR__) . '/Handdler/connection.php');
 
 if ($newSession->isAuthExists()) {
-    header("Location:userDashboard.php");
+    header("Location:dashboard.php");
     exit();
 }
 ?>
