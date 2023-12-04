@@ -51,10 +51,12 @@ if (!$newSession->isAuthExists()) {
 </head>
 
 <body>
+
+
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="userListing.php">View Information</a></li>
+                <li class="active"><a href="userListing.php?email=<?php echo $_GET['email']; ?>">View Information</a></li>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

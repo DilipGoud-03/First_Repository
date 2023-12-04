@@ -1,23 +1,17 @@
 <?php
 session_start();
-
 require_once(dirname(__DIR__) . '/Handdler/connection.php');
-
-if ($newSession->isAuthExists()) {
-    header("Location:dashboard.php");
-    exit();
-}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user login page with oops</title>
+    <title>Udate Page</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
     <style>
         * {
             max-width: 600px;
@@ -26,12 +20,12 @@ if ($newSession->isAuthExists()) {
         }
 
         form {
-
+            margin-top: 10px;
             width: 200px;
             /* font-size: 20px; */
             text-align: center;
             width: 330px;
-            height: 210px;
+            height: 370px;
             border: 2px solid black;
             border-radius: 12px;
         }
@@ -47,7 +41,7 @@ if ($newSession->isAuthExists()) {
         .submit_btn {
             width: 80px;
             height: 35px;
-            background-color: lightskyblue;
+            background-color: red;
             color: black;
             border: 2px solid black;
             border-radius: 9px;
@@ -55,40 +49,50 @@ if ($newSession->isAuthExists()) {
 
         }
 
-        .errorMsg {
+        .message {
             margin-top: 100px;
-            color: red;
             text-align: center;
-        }
-
-        span {
             color: red;
         }
     </style>
 </head>
 
 <body>
-    <div class="errorMsg">
+    <div class="message">
         <?php
         if ($newSession->hasError()) {
             echo $newSession->getError();
             $newSession->removeError();
         }
+        if ($newSession->hasMessage()) {
+            echo $newSession->getMessage();
+            $newSession->removeMessage();
+        }
+        $id = $_GET['id'];
+        $userData = $GetDataClass->find($id);
         ?>
-    </div><br><br>
-    <span id="error"></span>
-    <span id="success"></span>
-    <form id="loginPage" action="loginSubmit.php" method="post">
-        <div>Email Id :
-            <input class="input_field" type="text" name="email" value="">
+    </div>
+    <form id="loginPage" action="updateUserInfroSubmit.php" method="post">
+        <div>Register Here</div>
+        <input class="input_field" type="hidden" name="id" id="user" value="<?php echo $userData['id']; ?>">
+        <div>First_Name :
+            <input class="input_field" type="text" name="firstName" id="user" value="<?php echo $userData['name']; ?>">
+        </div><br>
+        <div>Email :
+            <input class="input_field" type="text" name="email" id="user" placeholder="email" value="<?php echo $userData['email']; ?>">
         </div><br>
         <div>Password :
-            <input class="input_field" type="text" name="password" value="">
+            <input class="input_field" type="password" name="password" id="password" placeholder="password" value="<?php echo $userData['password']; ?>">
+            <input class="input_field" type="hidden" name="status" placeholder="password" value="<?php echo $userData['status']; ?>">
         </div><br>
         <div>
-            <button class="submit_btn" type="submit" name="Login" id="login" value="Login">Login</button>
+            <button class="submit_btn" type="submit" name="submit" id="submit" value="submit">submit</button>
         </div>
     </form>
+
+    <?php
+
+    ?>
 </body>
 
 </html>

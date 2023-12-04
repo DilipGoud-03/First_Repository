@@ -23,16 +23,31 @@ class GetDataClass
             true
         );
     }
-    public function find(int $id): array
+    public function findByEmail(string $email): array
     {
-        $result = array_values(array_filter($this->data, function ($row) use ($id) {
-            if ($row['id'] == $id) {
+        $result = array_values(array_filter($this->data, function ($row) use ($email) {
+            if ($row['email'] == $email) {
                 return true;
             }
 
             return false;
         }));
 
+        if (!empty($result[0])) {
+            return $result[0];
+        }
+
+        return [];
+    }
+
+    public function find(int $id): array
+    {
+        $result = array_values(array_filter($this->data, function ($row) use ($id) {
+            if ($row['id'] == $id) {
+                return true;
+            }
+            return false;
+        }));
         if (!empty($result[0])) {
             return $result[0];
         }
@@ -98,14 +113,12 @@ class GetDataClass
             json_encode($this->data)
         );
     }
-
     public function getActive(): array
     {
         return array_values(array_filter($this->data, function ($row) {
             return $row['status'];
         }));
     }
-
     public function all(): array
     {
         return $this->data;

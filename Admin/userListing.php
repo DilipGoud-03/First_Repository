@@ -1,6 +1,11 @@
 <?php
 session_start();
 require(dirname(__DIR__) . '/Handdler/connection.php');
+
+if (!$newSession->isAuthExists()) {
+    header("Location:index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -118,13 +123,10 @@ require(dirname(__DIR__) . '/Handdler/connection.php');
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="Dashboard.php">Home</a></li>
-                <li class="active"><a href="userListing.php">ShowUsers</a>
-
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="notification.php"><span class="glyphicon glyphicon-user"></span>Message</a></li>
-                <li class="active"><a href="logout.php">Logout</a>
                 </li>
             </ul>
         </div>
@@ -174,6 +176,7 @@ require(dirname(__DIR__) . '/Handdler/connection.php');
                 if (($myObject)) {
                 ?>
                     <td class="Action">
+                        <a class="Edit" href="updateUserInfoIndex.php?id=<?php echo $myObject[$key]['id']; ?>">Update</a>
                         <a class="Delete" href="removeUser.php?id=<?php echo $myObject[$key]['id']; ?>">Delete</a>
                     </td>
             <?php
@@ -183,7 +186,6 @@ require(dirname(__DIR__) . '/Handdler/connection.php');
             ?>
         </tbody>
     </table>
-    <button type="submit" class="back"><a href="dashboard.php">Back</a></button>
 </body>
 
 </html>
