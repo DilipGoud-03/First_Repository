@@ -70,7 +70,7 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
         }
         ?>
     </div>
-    <form id="loginPage" action="userDataSubmit.php" method="post">
+    <form id="loginPage" action="../Handdler/registrationSubmitOrUpdate.php" method="post">
         <div>Register Here</div>
         <div>First_Name :
             <input class="input_field" type="text" name="firstName" id="user" placeholder="First name" value="">
@@ -82,7 +82,7 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
             <input class="input_field" type="password" name="password" id="password" placeholder="password" value="">
         </div><br>
         <div>
-            <button class="submit_btn" type="submit" name="submit" id="submit" value="submit">submit</button>
+            <button class="submit_btn" type="submit" name="userRegister" id="submit" value="submit">submit</button>
         </div>
     </form>
 </body>

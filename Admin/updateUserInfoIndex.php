@@ -72,7 +72,7 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
         $userData = $GetDataClass->find($id);
         ?>
     </div>
-    <form id="loginPage" action="updateUserInfroSubmit.php" method="post">
+    <form id="loginPage" action="../Handdler/registrationSubmitOrUpdate.php" method="post">
         <div>Register Here</div>
         <input class="input_field" type="hidden" name="id" id="user" value="<?php echo $userData['id']; ?>">
         <div>First_Name :
@@ -86,7 +86,7 @@ require_once(dirname(__DIR__) . '/Handdler/connection.php');
             <input class="input_field" type="hidden" name="status" placeholder="password" value="<?php echo $userData['status']; ?>">
         </div><br>
         <div>
-            <button class="submit_btn" type="submit" name="submit" id="submit" value="submit">submit</button>
+            <button class="submit_btn" type="submit" name="adminEdit" id="submit" value="submit">submit</button>
         </div>
     </form>
 

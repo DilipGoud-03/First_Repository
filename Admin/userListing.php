@@ -122,11 +122,11 @@ if (!$newSession->isAuthExists()) {
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="Dashboard.php">Home</a></li>
+                <li class="active"><a href="dashboard.php">Home</a></li>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="notification.php"><span class="glyphicon glyphicon-user"></span>Message</a></li>
+                <!-- <li class="active"><a href="notification.php"><span class="glyphicon glyphicon-user"></span>Message</a></li> -->
                 </li>
             </ul>
         </div>

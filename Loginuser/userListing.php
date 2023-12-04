@@ -1,11 +1,10 @@
 <?php
 session_start();
 require_once(dirname(__DIR__) . '/Handdler/connection.php');
-if (!$newSession->isAuthExists()) {
+if (!$newSession->isUserExists()) {
     header("Location: index.php");
     exit();
 }
-?>
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,18 +100,11 @@ if (!$newSession->isAuthExists()) {
             font-size: 20px;
         }
 
-        .back {
-            margin: 12px;
-            color: black;
-            float: right;
-            font-weight: 700;
-            border-radius: 5px;
-            font-size: 20px;
-            width: 80px;
-            text-decoration-line: none;
+        h2 {
+            text-align: center;
         }
 
-        h2 {
+        h3 {
             text-align: center;
         }
     </style>
@@ -126,15 +118,10 @@ if (!$newSession->isAuthExists()) {
 
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="notification.php"><span class="glyphicon glyphicon-user"></span>Message</a></li>
-                <li class="active"><a href="logout.php">Logout</a>
-                </li>
-            </ul>
         </div>
     </nav>
     <h2>User Listing Table</h2>
-    <h2>
+    <h3>
         <?php
         if ($newSession->hasError()) {
             echo $newSession->getError();
@@ -145,8 +132,7 @@ if (!$newSession->isAuthExists()) {
             $newSession->removeMessage();
         }
         ?>
-
-    </h2>
+    </h3>
     <table id="table" cellspacing="0" width="100%">
         <thead>
             <tr>
@@ -179,8 +165,6 @@ if (!$newSession->isAuthExists()) {
 
         </tbody>
     </table>
-
-    <button type="submit" class="back"><a href="dashboard.php">Back</a></button>
 </body>
 
 </html>

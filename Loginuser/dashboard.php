@@ -2,7 +2,7 @@
 session_start();
 
 require(dirname(__DIR__) . '/Handdler/connection.php');
-if (!$newSession->isAuthExists()) {
+if (!$newSession->isUserExists()) {
     header("Location: index.php");
     exit();
 }
