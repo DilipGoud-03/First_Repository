@@ -3,7 +3,7 @@ session_start();
 
 require_once(dirname(__DIR__) . '/Handdler/connection.php');
 
-if ($newSession->isAuthExists()) {
+if ($newSession->isUserExists()) {
     header("Location:dashboard.php");
     exit();
 }
@@ -78,7 +78,7 @@ if ($newSession->isAuthExists()) {
     </div><br><br>
     <span id="error"></span>
     <span id="success"></span>
-    <form id="loginPage" action="loginSubmit.php" method="post">
+    <form id="loginPage" action="../Handdler/loginSubmit.php" method="post">
         <div>Email Id :
             <input class="input_field" type="text" name="email" value="">
         </div><br>
@@ -86,7 +86,7 @@ if ($newSession->isAuthExists()) {
             <input class="input_field" type="text" name="password" value="">
         </div><br>
         <div>
-            <button class="submit_btn" type="submit" name="Login" id="login" value="Login">Login</button>
+            <button class="submit_btn" type="submit" name="userLogin" id="login" value="Login">Login</button>
         </div>
     </form>
 </body>

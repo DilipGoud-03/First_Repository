@@ -16,6 +16,20 @@ class NewSession
         unset($_SESSION['id']);
     }
 
+    public function isUserExists(): bool
+    {
+        return !empty($_SESSION['uId']);
+    }
+    public function setUserId(int $uId): void
+    {
+        $_SESSION['uId'] = $uId;
+    }
+
+    public function removeUserId(): void
+    {
+        unset($_SESSION['uId']);
+    }
+
     public function hasAuth(): bool
     {
         return !empty($_SESSION['authName']);
