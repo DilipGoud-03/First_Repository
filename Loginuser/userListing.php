@@ -114,14 +114,14 @@ if (!$newSession->isUserExists()) {
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="dashboard.php">Home</a></li>
+                <li class="active"><a href="dashboard.php?email=<?php echo $_GET['email']; ?>">Home</a></li>
 
                 </li>
             </ul>
         </div>
     </nav>
     <h2>User Listing Table</h2>
-    <h3>
+    <h4>
         <?php
         if ($newSession->hasError()) {
             echo $newSession->getError();
@@ -132,7 +132,7 @@ if (!$newSession->isUserExists()) {
             $newSession->removeMessage();
         }
         ?>
-    </h3>
+    </h4>
     <table id="table" cellspacing="0" width="100%">
         <thead>
             <tr>

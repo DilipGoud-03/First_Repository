@@ -4,7 +4,7 @@ class GetDataClass
 {
     private array $data;
     private string $filePath;
-    private $adminName = "dilip";
+    private $adminName = "admin";
     private $password = "1234";
 
     public function matchAdminNamePass($adminName, $password)
