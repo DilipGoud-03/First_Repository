@@ -4,12 +4,11 @@ require(dirname(__DIR__) . '/Handdler/connection.php');
 
 $id = (int)$_GET['id'];
 if ($id == false) {
-    $newSession->setError('Data not deleted');
+    $newSession->setError('User Information not deleted');
     header('Location:userListing.php');
     exit;
 }
 $GetDataClass->deleteUser($id);
-
-$newSession->setMessage('Data has deleted');
+$newSession->setMessage('User Information has been deleted');
 header('Location:userListing.php');
 exit;

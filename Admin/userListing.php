@@ -115,6 +115,10 @@ if (!$newSession->isAuthExists()) {
         h2 {
             text-align: center;
         }
+
+        h4 {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -132,16 +136,18 @@ if (!$newSession->isAuthExists()) {
         </div>
     </nav>
     <h2>User Listing Table</h2>
-    <?php
-    if ($newSession->hasError()) {
-        echo $newSession->getError();
-        $newSession->removeError();
-    }
-    if ($newSession->hasMessage()) {
-        echo $newSession->getMessage();
-        $newSession->removeMessage();
-    }
-    ?>
+    <h4>
+        <?php
+        if ($newSession->hasError()) {
+            echo $newSession->getError();
+            $newSession->removeError();
+        }
+        if ($newSession->hasMessage()) {
+            echo $newSession->getMessage();
+            $newSession->removeMessage();
+        }
+        ?>
+    </h4>
 
     <?php
     $myData = file_get_contents(dirname(__DIR__) . '/Handdler/JsonData/data.json');
