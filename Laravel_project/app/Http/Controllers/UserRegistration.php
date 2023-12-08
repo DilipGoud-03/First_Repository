@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Routing\Route;
+// use Illuminate\Routing\Route;
 
 class UserRegistration extends Controller
 {
@@ -13,8 +13,7 @@ class UserRegistration extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         if ($name && $email) {
-            // $array = array();
-            // $array->array_push($name, $email);
+
             echo 'Name: ' . $name;
             echo '<br>';
             echo 'Email: ' . $email;
