@@ -5,25 +5,28 @@
 </head>
 
 <body>
-    <form action="user" method="post">
-        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
-        <table>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="name" /></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input type="text" name="email" /></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Register" />
-                </td>
-            </tr>
-        </table>
+    <div aria-colspan="2" align='center'>
+        <form action="user" method="post">
+            <input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" /></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="email" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Register" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <a href="{{ route('welcome')}}">Home</a>
 
-    </form>
 </body>
 
 </html>
