@@ -22,7 +22,14 @@
             </div>
         </div>
     </nav>
+
     <div class="justify-content-center mt-5">
+        @if ($message = Session::get('success'))
+        <div class="justify-content-center mt-5 alert alert-success">
+            {{ $message }}
+        </div>
+        @endif
+
         <table class="table">
             <thead>
                 <tr>
@@ -30,16 +37,19 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Roll</th>
+                    <th>Action</th>
 
                 </tr>
             </thead>
             <tbody>
-                @for($i=0;$i<count($users);$i++) <tr>
+                @for($i=1;$i<count($users);$i++) <tr>
                     <td>{{$users[$i]->id}}</td>
                     <td>{{$users[$i]->name}}</td>
                     <td>{{$users[$i]->email}}</td>
                     <td>{{$users[$i]->Roll_id}}</td>
-
+                    <td>
+                        <a class="" href="{{ route('deleteUserByAdmin',[$users[$i]->id])}}">Delete</a>
+                    </td>
                     </tr>
                     @endfor
             </tbody>

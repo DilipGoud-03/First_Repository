@@ -15,15 +15,6 @@ use App\Http\Controllers\Controller;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/oneToOneRelationship', [Controller::class, 'oneToOne']);
-
-// Route::get('/oneToManyRelationship', [Controller::class, 'oneToOne']);
-
-Route::get('/AuthDashboard', [LoginRegisterController::class, 'AuthDashboard'])->name('AuthDashboard');
 
 Route::get('/register', [LoginRegisterController::class, 'register'])->name('register');
 
@@ -33,10 +24,20 @@ Route::get('/login', [LoginRegisterController::class, 'login'])->name('login');
 
 Route::post('/loginUserAdmin', [LoginRegisterController::class, 'loginUserAdmin'])->name('loginUserAdmin');
 
+Route::get('/AuthDashboard', [LoginRegisterController::class, 'AuthDashboard'])->name('AuthDashboard');
+
 Route::get('/dashboard', [LoginRegisterController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
 Route::get('/userViewInformation', [LoginRegisterController::class, 'userViewInformation'])->name('userViewInformation');
+
+Route::get('/userInformation', [LoginRegisterController::class, 'userInformation'])->name('userInformation');
+
+Route::get('/deleteUserByAdmin/{id}', [LoginRegisterController::class, 'deleteUserByAdmin'])->name('deleteUserByAdmin');
+
+Route::get('/deleteUserByUser', [LoginRegisterController::class, 'deleteUserByUser'])->name('deleteUserByUser');
+
+Route::get('/userInformation', [LoginRegisterController::class, 'userInformation'])->name('userInformation');
 
 Route::get('/userInformation', [LoginRegisterController::class, 'userInformation'])->name('userInformation');

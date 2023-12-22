@@ -55,13 +55,14 @@ class LoginRegisterController extends Controller
             'email' => 'required|email|max:150|unique:users',
             'password' => 'required|min:5|confirmed',
 
+
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => ($request->email),
             'password' => Hash::make($request->password),
-
+            'Roll_id' => 0
         ]);
 
         $testMailData = [
@@ -83,29 +84,48 @@ class LoginRegisterController extends Controller
             'password' => 'required|min:5|',
 
         ]);
-        // dd($request->email . "  " . $request->password);
-
         $users = DB::table('users')->where('email', $request->email)->get();
+        if ($users) {
 
-        foreach ($users as $user) {
-            $user->Roll_id;
-            $user->email;
-            $user->name;
-        }
+            foreach ($users as $user) {
+                $user->Roll_id;
+                $user->email;
+                $user->name;
 
-        switch ($user->Roll_id) {
-            case $user->Roll_id = 0:
-                return redirect()->route('dashboard', ['name' => $user->email])->withSuccess('Welcome  ' . $user->name);
-                break;
-            case $user->Roll_id = 1:
-                return redirect()->route('AuthDashboard')->withSuccess('Welcome  ' . $user->name);
-                break;
+
+                switch ($user->Roll_id) {
+                    case $user->Roll_id = 0:
+                        return redirect()->route('dashboard', ['email' => $user->email, 'name' => $user->name])->withSuccess('Welcome  ' . $user->name);
+                        break;
+                    case $user->Roll_id = 1:
+                        return redirect()->route('AuthDashboard')->withSuccess('Welcome  ' . $user->name);
+                        break;
+                }
+            }
         }
+        return redirect()->route('login')->withErrors('Please register first');
     }
+
     public function userViewInformation(Request $request)
+
     {
+        // dd($request->email);
         $users = DB::table('users')->where('email', $request->email)->get();
         return view('user.userInformation', ['users' => $users]);
+    }
+
+    public function deleteUserByAdmin(Request $request)
+    {
+        DB::table('users')->where('id', $request
+            ->id)->delete();
+        return redirect()->route('userInformation')->withSuccess('User has been deleted');
+    }
+
+    public function deleteUserByUser(Request $request)
+    {
+        DB::table('users')->where('id', $request
+            ->id)->delete();
+        return redirect()->route('login');
     }
 
     public function logout()

@@ -15,20 +15,22 @@
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}" href="{{ route('dashboard') }}">dashboard</a>
+                    <li class="justify-content-center">
+                        User Information
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="row justify-content-center mt-5">
+    <div class="justify-content-center mt-5">
         <table class="table">
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Action</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +38,9 @@
                     <td>{{$users[$i]->id}}</td>
                     <td>{{$users[$i]->name}}</td>
                     <td>{{$users[$i]->email}}</td>
+                    <td>
+                        <a href=" {{ route('deleteUserByUser',[$users[$i]->id])}}">Delete</a>
+                    </td>
                     </tr>
                     @endfor
             </tbody>

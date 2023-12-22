@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('userViewInformation')) ? 'active' : '' }}" href="{{ route('userViewInformation') }}">View Information</a>
+                        <a class="nav-link {{ (request()->is('userViewInformation')) ? 'active' : '' }}" href="{{ route('userViewInformation',['email'=>$_GET['email']]) }}">View Information</a>
                     </li>
                     <li class="nav-item">
                     </li>
@@ -30,9 +30,11 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <div class="card">
+
+
                 <div class="card-header">Dashboard</div>
                 <div class="card-body">
-                    <h2 class="text-align"> Welcome: User</h2>
+                    <h2 class="text-align"> Welcome: {{$_GET['name']}}</h2>
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         {{ $message }}
