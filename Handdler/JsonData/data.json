@@ -1,1 +1,51 @@
-{"1":{"id":2,"name":"suresh","email":"suresh@gmail.com","password":"suresh","status":true},"2":{"id":3,"name":"Dilip","email":"dilipgaurh2017@gmail.com","password":"Dilip","status":true},"3":{"id":4,"name":"Raghav","email":"raghav@gmail.com","password":"Raghav","status":true},"5":{"id":6,"name":"Ravi","email":"ravi@gmail.com","password":"Ravi","status":true},"6":{"id":7,"name":"Sachin","email":"sachinsharma@gmail.com","password":"saachin","status":true},"7":{"id":8,"name":"Ram Yadav","email":"ramyadav@gamail.com","password":"1234","status":true}}
+{
+    "1": {
+        "id": 2,
+        "name": "suresh",
+        "email": "suresh@gmail.com",
+        "password": "suresh",
+        "status": true
+    },
+    "2": {
+        "id": 3,
+        "name": "Dilip Goud",
+        "email": "dilipgaurh2017@gmail.com",
+        "password": "Dilip",
+        "status": "1"
+    },
+    "3": {
+        "id": 4,
+        "name": "Raghav",
+        "email": "raghav@gmail.com",
+        "password": "Raghav",
+        "status": true
+    },
+    "5": {
+        "id": 6,
+        "name": "Ravi Rathore",
+        "email": "ravirathor@gmail.com",
+        "password": "Ravi@123",
+        "status": "1"
+    },
+    "6": {
+        "id": 7,
+        "name": "Sachin",
+        "email": "sachinsharma@gmail.com",
+        "password": "sachin",
+        "status": "1"
+    },
+    "7": {
+        "id": 8,
+        "name": "Ram Yadav",
+        "email": "ramyadav@gamail.com",
+        "password": "1234",
+        "status": true
+    },
+    "8": {
+        "id": 9,
+        "name": "Gourav Panchal",
+        "email": "gouravpanchal@gmail.com",
+        "password": "Gourav@Panchal",
+        "status": true
+    }
+}
