@@ -1,7 +1,3 @@
-@extends('layouts.auth')
-
-@section('content')
-
 <div class="row justify-content-center mt-5">
     <div class="col-md-8">
 
@@ -54,4 +50,7 @@
         </div>
     </div>
 </div>
-@endsection
+
+</body>
+
+</html>

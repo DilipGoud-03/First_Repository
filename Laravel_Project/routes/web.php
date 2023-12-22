@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +18,9 @@ use App\Http\Controllers\Controller;
 |
 */
 
-
+Route::get('/', function () {
+    return view('home');
+});
 Route::get('/register', [LoginRegisterController::class, 'register'])->name('register');
 
 Route::post('/store', [LoginRegisterController::class, 'store'])->name('store');
@@ -24,7 +29,10 @@ Route::get('/login', [LoginRegisterController::class, 'login'])->name('login');
 
 Route::post('/loginUserAdmin', [LoginRegisterController::class, 'loginUserAdmin'])->name('loginUserAdmin');
 
-Route::get('/AuthDashboard', [LoginRegisterController::class, 'AuthDashboard'])->name('AuthDashboard');
+Route::group(['middleware' => ['auth', 'isAdmin']], function () {
+
+    Route::get('/AuthDashboard', [LoginRegisterController::class, 'AuthDashboard'])->name('AuthDashboard');
+});
 
 Route::get('/dashboard', [LoginRegisterController::class, 'dashboard'])->name('dashboard');
 

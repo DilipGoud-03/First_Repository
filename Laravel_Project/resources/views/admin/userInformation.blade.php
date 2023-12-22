@@ -38,7 +38,6 @@
                     <th>Email</th>
                     <th>Roll</th>
                     <th>Action</th>
-
                 </tr>
             </thead>
             <tbody>

@@ -20,6 +20,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
@@ -47,8 +48,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime: m-Y-d',
         'password' => 'hashed',
     ];
-    function EmployeAndDetails()
-    {
-        return $this->hasManyThrough(Employers::class, EmployersContactInfo::class,    'employer_id', 'Admin_id',  'id', 'id');
-    }
 }

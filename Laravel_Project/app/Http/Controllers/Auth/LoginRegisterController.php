@@ -84,24 +84,12 @@ class LoginRegisterController extends Controller
             'password' => 'required|min:5|',
 
         ]);
-        $users = DB::table('users')->where('email', $request->email)->get();
-        if ($users) {
-
-            foreach ($users as $user) {
-                $user->Roll_id;
-                $user->email;
-                $user->name;
-
-
-                switch ($user->Roll_id) {
-                    case $user->Roll_id = 0:
-                        return redirect()->route('dashboard', ['email' => $user->email, 'name' => $user->name])->withSuccess('Welcome  ' . $user->name);
-                        break;
-                    case $user->Roll_id = 1:
-                        return redirect()->route('AuthDashboard')->withSuccess('Welcome  ' . $user->name);
-                        break;
-                }
-            }
+        if (Auth::user()->Roll_id == '1') //1 = Admin Login
+        {
+            return redirect()->route('')->withSuccess('Welcome to your dashboard');
+        } elseif (Auth::user()->Roll_id == '0') // Normal or Default User Login
+        {
+            return redirect()->route('dashboard')->withSuccess('Logged in successfully');
         }
         return redirect()->route('login')->withErrors('Please register first');
     }
