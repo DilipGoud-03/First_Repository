@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +16,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('userInformation')) ? 'active' : '' }}" href="{{ route('userInformation') }}">View Information</a>
+                        <a class="nav-link {{ (request()->is('userInformation')) ? 'active' : '' }}" href="{{ route('userInformation',['email'=>$_GET['email']]) }}">View Information</a>
                     </li>
                     <li class="nav-item">
                     </li>
@@ -27,6 +30,7 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-8">
             <div class="card">
+                <?php ?>
                 <div class="card-header">Dashboard</div>
                 <div class="card-body">
                     <h2 class="text-align"> Welcome: User</h2>
@@ -41,3 +45,5 @@
     </div>
 
 </body>
+
+</html>
