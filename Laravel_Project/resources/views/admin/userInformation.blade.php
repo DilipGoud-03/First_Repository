@@ -22,7 +22,6 @@
             </div>
         </div>
     </nav>
-
     <div class="justify-content-center mt-5">
         @if ($message = Session::get('success'))
         <div class="justify-content-center mt-5 alert alert-success">
@@ -36,23 +35,30 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Roll</th>
-                    <th>Password</th>
+                    <th>Role</th>
+                    <th>Created Time</th>
+                    <th>Updated Time</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user) <tr>
-                    <td>{{$loop->index+1}}</td>
+                @foreach($users as $user)
+                @if($user->role==0)
+                <tr>
+                    <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td>{{$user->role}}</td>
-                    <td>{{$user->password}}</td>
+                    <td><a style="color:black;text-decoration: none;" href="{{ route('updateUserRoleIndex',[$user->id])}}" title="Click to change role">
+                            @if($user->role==0) User @endif </a>
+                    </td>
+                    <td>{{$user->created_at}}</td>
+                    <td>{{$user->updated_at}}</td>
                     <td>
-                        <a class="btn btn-danger " href="{{ route('deleteUserByAdmin',[$user->id])}}">Delete</a>
-                        <a class="btn btn-dark" href="{{ route('updateUser',[$user->id])}}">Edit</a>
+                        <a class="btn btn-danger  " href="{{ route('deleteUserByAdmin',[$user->id])}}">Delete</a>
+                        <a class="btn btn-dark" href="{{ route('updateUserIndex',[$user->id])}}">Edit</a>
                     </td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>

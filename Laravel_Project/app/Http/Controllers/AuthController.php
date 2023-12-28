@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+    function index()
+    {
+        return view('home');
+    }
+
     function register()
     {
 
@@ -70,8 +76,11 @@ class AuthController extends Controller
     }
     public function logout(Request $request)
     {
-        $request->session()->invalidate();
         Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
         return redirect()->route('login')->with('error', 'You have logout successfully');
     }
     function redirectDash()

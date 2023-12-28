@@ -36,12 +36,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{1}}</td>
+                        <td>{{$loop->index+1}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>
                             <a class="btn btn-danger " href="{{ route('deleteUserByUser',[$user->id])}}">Delete</a>
-                            <a class="btn btn-dark" href="{{ route('update',[$user->id])}}">Edit</a>
+                            <a class="btn btn-dark" href="{{ route('update',[$user->id,'email'=>$user->email])}}">Edit</a>
                         </td>
                     </tr>
                     @endforeach

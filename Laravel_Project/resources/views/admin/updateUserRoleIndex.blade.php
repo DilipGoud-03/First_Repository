@@ -1,18 +1,13 @@
 @extends('layouts.auth')
 
 @section('content')
-
 <div class="row justify-content-center mt-5">
     <div class="col-md-8">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            {{ $message }}
-        </div>
-        @endif
+
         <div class="card">
-            <div class="card-header">Here Update</div>
+            <div class="card-header">Update User Role Here</div>
             <div class="card-body">
-                <form action="{{ route('storeUpdateUser',[$users->id]) }}" method="post">
+                <form action="{{ route('saveUpdateUserRole',[$users->id]) }}" method="post">
                     @csrf
                     <div class="mb-3 row">
                         <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
@@ -33,20 +28,15 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="password" class="col-md-4 col-form-label text-md-end text-start">New Password</label>
+                        <label for="role" class="col-md-4 col-form-label text-md-end text-start">Role</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
-                            @if ($errors->has('password'))
-                            <small class="text-danger">{{ $errors->first('password') }}</small>
-                            @endif
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="password_confirmation" class="col-md-4 col-form-label text-md-end text-start">New Confirm Password</label>
-                        <div class="col-md-6">
-                            <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id=" password_confirmation" name="password_confirmation">
-                            @if ($errors->has('password_confirmation'))
-                            <small class=" text-danger">{{ $errors->first('password_confirmation') }}</small>
+                            <select class="form-control @error('role') is-invalid @enderror" id=" role" name="role">
+                                <option>Select Role</option>
+                                <option value="0">User</option>
+                                <option value="1">Admin</option>
+                            </select>
+                            @if ($message = Session::get('error'))
+                            <small class=" text-danger">{{ $message }}</small>
                             @endif
                         </div>
                     </div>

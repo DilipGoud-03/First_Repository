@@ -16,31 +16,40 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+
+Route::controller(AuthController::class)->group(function () {
+
+    Route::get('/', 'index')->name('home');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/loginRequest', 'loginRequest')->name('loginRequest');
+    Route::get('/logout', 'logout')->name('logout');
 });
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/store', [AuthController::class, 'store'])->name('store');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/loginRequest', [AuthController::class, 'loginRequest'])->name('loginRequest');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware(['is_admin'])->group(function () {
 
-Route::group(['middleware' => ['is_admin']], function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('adminDashboard');
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('adminDashboard');
 
-    Route::get('/deleteUserByAdmin/{id}', [AdminController::class, 'deleteUserByAdmin'])->name('deleteUserByAdmin');
-    Route::get('/userInformationByAdmin', [AdminController::class, 'userInformationByAdmin'])->name('userInformationByAdmin');
-    Route::get('/updateUser/{id}', [AdminController::class, 'updateUser'])->name('updateUser');
-    Route::post('/saveUpdate/{id}', [AdminController::class, 'saveUpdate'])->name('saveUpdate');
+        Route::get('/deleteUserByAdmin/{id}', 'deleteUserByAdmin')->name('deleteUserByAdmin');
+        Route::get('/userInformationByAdmin', 'userInformationByAdmin')->name('userInformationByAdmin');
+        Route::get('/updateUserIndex/{id}', 'updateUserIndex')->name('updateUserIndex');
+        Route::post('/saveUpdate/{id}', 'saveUpdate')->name('saveUpdate');
+
+        Route::get('/updateUserRoleIndex/{id}', 'updateUserRoleIndex')->name('updateUserRoleIndex');
+        Route::post('/saveUpdateUserRole/{id}', 'saveUpdateUserRole')->name('saveUpdateUserRole');
+    });
 });
 
+Route::middleware(['is_user'])->group(function () {
 
-Route::group(['middleware' => ['is_user']], function () {
-    Route::get('/userDashboard', [UserController::class, 'userDashboard'])->name('userDashboard');
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/userDashboard', 'userDashboard')->name('userDashboard');
 
-    Route::get('/deleteUserByUser/{id}', [UserController::class, 'deleteUserByUser'])->name('deleteUserByUser');
-    Route::get('/userViewInformation', [UserController::class, 'userViewInformation'])->name('userInformation');
-    Route::get('/update/{id}', [UserController::class, 'update'])->name('update');
-    Route::post('/saveUpdateUser/{id}', [UserController::class, 'saveUpdateUser'])->name('saveUpdateUser');
+        Route::get('/deleteUserByUser/{id}', 'deleteUserByUser')->name('deleteUserByUser');
+        Route::get('/userViewInformation', 'userViewInformation')->name('userInformation');
+        Route::get('/update/{id}', 'update')->name('update');
+        Route::post('/storeUpdateUser/{id}', 'storeUpdateUser')->name('storeUpdateUser');
+    });
 });

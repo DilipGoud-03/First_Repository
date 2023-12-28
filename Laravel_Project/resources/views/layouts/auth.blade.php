@@ -26,6 +26,16 @@
                         <a class="nav-link {{ (request()->is('logout')) ? 'active' : '' }}" href="{{ route('logout') }}">logout</a>
                     </li>
                     @endif
+                    @if(Auth::user()->role==0)
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('userInformation')) ? 'active' : '' }}" href="{{ route('userInformation',['email'=>$_GET['email']]) }}">View Information</a>
+                    </li>
+                    <li class="nav-item">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('logout')) ? 'active' : '' }}" href="{{ route('logout') }}">logout</a>
+                    </li>
+                    @endif
                     @else
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('login')) ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
