@@ -2,33 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Jobs\NewUserWelcomeMail;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function userDashboard()
     {
-        return view('user.dashboard');
+        return view('admin.dashboard');
     }
     public function userViewInformation(Request $request)
 
     {
-        $users = DB::table('users')->where('email', $request->email)->get();
-        return view('user.userInformation', ['users' => $users]);
+        $users = User::where('email', $request->email)->get();
+        return view('admin.userInformation', ['users' => $users]);
     }
     public function deleteUserByUser(Request $request)
     {
-        DB::table('users')->where('id', $request
-            ->id)->delete();
+        User::find($request->id)->delete();
         return redirect()->route('login');
     }
     public function update(Request $request)
     {
-        $users = DB::table('users')->where('id', $request->id)->first();
-        return view('user.updateUser', ['users' => $users]);
+        // $users = DB::table('users')->where('id', $request->id)->first();
+        $users =  User::find($request->id)->first();
+        return view('admin.updateUserIndex', ['users' => $users]);
     }
     function storeUpdateUser(Request $request)
     {
@@ -41,15 +39,6 @@ class UserController extends Controller
 
         User::find($request->id)->update($request
             ->all());
-        $testMailData = [
-            'title' => ('Hello ' .  $request->name),
-            'body' => ('This is Mail From Profilics Pvt. Limited'),
-            'instruction' => ('You have Upadte Your Information'),
-            'useremail' => ('Your Email: ' .  $request->email),
-            'userpassword' => ('and your New Password : ' .  $request->password),
-            'thanksMessage' => ('Thank You for registring our website'),
-        ];
-        dispatch(new NewUserWelcomeMail($request->email, $testMailData));
         $request->session()->invalidate();
         return redirect()->route('login')->with('success', 'Your information has been updated successfully, Please login again ');
     }

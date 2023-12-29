@@ -18,33 +18,37 @@
                     @if(Auth::user())
                     @if(Auth::user()->role==1)
                     <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('adminDashboard')) ? 'active' : '' }}" href="{{ route('adminDashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ (request()->is('userInformationByAdmin')) ? 'active' : '' }}" href="{{ route('userInformationByAdmin') }}">View Information</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('logout')) ? 'active' : '' }}" href="{{ route('logout') }}">Logout</a>
+                    </li>
+                    @else
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ (request()->is('userDashboard')) ? 'active' : '' }}" href="{{ route('userDashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('logout')) ? 'active' : '' }}" href="{{ route('logout') }}">logout</a>
-                    </li>
-                    @endif
-                    @if(Auth::user()->role==0)
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('userInformation')) ? 'active' : '' }}" href="{{ route('userInformation',['email'=>$_GET['email']]) }}">View Information</a>
+                        <a class="nav-link {{ (request()->is('userViewInformation')) ? 'active' : '' }}" href="{{ route('userInformation',['email'=> Auth::user()->email]) }}">View Information</a>
                     </li>
                     <li class="nav-item">
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('logout')) ? 'active' : '' }}" href="{{ route('logout') }}">logout</a>
+                        <a class="nav-link {{ (request()->is('logout')) ? 'active' : '' }}" href="{{ route('logout') }}">Logout</a>
                     </li>
                     @endif
                     @else
+                    <li class="nav-item-left">
+                        <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{url('/')}}">Home</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {{ (request()->is('login')) ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {{ (request()->is('register')) ? 'active' : '' }}" href="{{ route('register') }}">Register</a>
                     </li>
+
                     @endif
                 </ul>
             </div>

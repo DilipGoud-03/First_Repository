@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\NewUserWelcomeMail;
+use App\Jobs\RecieveMailFromUser;
+use App\Mail\RecieveMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class AuthController extends Controller
 {
-
     function index()
     {
         return view('home');
@@ -30,20 +32,25 @@ class AuthController extends Controller
             'password' => 'required|min:5|confirmed',
         ]);
 
-        User::create([
+        $recieveMailData = User::create([
             'name' => $request->name,
             'email' => ($request->email),
             'password' => Hash::make($request->password),
         ]);
         $testMailData = [
-            'title' => ('Hello ' .  $request->name),
+            'title' => ($request->name),
             'body' => ('This is Mail From Profilics Pvt. Limited'),
             'useremail' => ('Your Email: ' .  $request->email),
             'userpassword' => ('and your Password : ' .  $request->password),
             'thanksMessage' => ('Thank You for registring our website'),
             'instruction' => ('We are remember you, Hope you will remind your password because we can not provide again.')
         ];
-        dispatch(new NewUserWelcomeMail($request->email, $testMailData));
+        Mail::to($request->email)->send(new SendMail(
+            $testMailData
+        ));
+        Mail::to($request->email)->send(new RecieveMail($recieveMailData));
+        // dispatch(new RecieveMailFromUser($request->email, $recieveMailData));
+        // dispatch(new NewUserWelcomeMail($request->email, $testMailData));
         return redirect()->route('login')->withSuccess('Your registration has been submitted successfully Please Check Your Gmail');
     }
     function login()
@@ -64,23 +71,17 @@ class AuthController extends Controller
 
         if (Auth::attempt($userCredential)) {
             if (Auth::user() && Auth::user()->role == 1) {
-                $request->session()->regenerate();
                 return redirect()->route('adminDashboard')->with('success', 'Welcome Admin');
             } else {
-                $request->session()->regenerate();
-                return redirect()->route('userDashboard', ['email' => $request->email])->with('success', 'Welcome You are Logged In');
+                return redirect()->route('userDashboard')->with('success', 'Welcome You are Logged In');
             }
         } else {
             return back()->with('error', 'Username & Password is incorrect');
         }
     }
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
         return redirect()->route('login')->with('error', 'You have logout successfully');
     }
     function redirectDash()

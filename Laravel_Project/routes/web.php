@@ -18,7 +18,6 @@ use App\Http\Controllers\AdminController;
 
 
 Route::controller(AuthController::class)->group(function () {
-
     Route::get('/', 'index')->name('home');
     Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
@@ -30,7 +29,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::middleware(['is_admin'])->group(function () {
 
     Route::controller(AdminController::class)->group(function () {
-        Route::get('/dashboard', 'dashboard')->name('adminDashboard');
+        Route::get('/adminDashboard', 'dashboard')->name('adminDashboard');
 
         Route::get('/deleteUserByAdmin/{id}', 'deleteUserByAdmin')->name('deleteUserByAdmin');
         Route::get('/userInformationByAdmin', 'userInformationByAdmin')->name('userInformationByAdmin');
@@ -41,7 +40,6 @@ Route::middleware(['is_admin'])->group(function () {
         Route::post('/saveUpdateUserRole/{id}', 'saveUpdateUserRole')->name('saveUpdateUserRole');
     });
 });
-
 Route::middleware(['is_user'])->group(function () {
 
     Route::controller(UserController::class)->group(function () {

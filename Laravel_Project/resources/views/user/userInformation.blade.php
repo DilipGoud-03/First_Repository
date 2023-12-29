@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    @foreach($users as $user)
+
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('userDashboard')) ? 'active' : '' }}" href="{{ route('userDashboard',['email'=>$user->email]) }}">Dashboard</a>
+                        <a class="nav-link {{ (request()->is('userDashboard')) ? 'active' : '' }}" href="{{ route('userDashboard',['email'=>Auth::user()->email]) }}">Dashboard</a>
                     </li>
                 </ul>
             </div>
@@ -26,26 +26,7 @@
     <div>
         <div class="justify-content-center mt-5">
             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{$loop->index+1}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>
-                            <a class="btn btn-danger " href="{{ route('deleteUserByUser',[$user->id])}}">Delete</a>
-                            <a class="btn btn-dark" href="{{ route('update',[$user->id,'email'=>$user->email])}}">Edit</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
+
             </table>
         </div>
     </div>
