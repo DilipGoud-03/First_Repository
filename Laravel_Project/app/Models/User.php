@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -20,11 +21,15 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'Roll_id',
+        'token',
+        'role',
+        'is_email_verified',
+        'rememberToken'
 
     ];
 
@@ -44,11 +49,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime: m-Y-d',
+        'email_verified_at' => 'datetime: Y-m-d',
         'password' => 'hashed',
     ];
-    function EmployeAndDetails()
-    {
-        return $this->hasManyThrough(Employers::class, EmployersContactInfo::class,    'employer_id', 'Admin_id',  'id', 'id');
-    }
 }

@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginRegisterController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,28 +16,42 @@ use App\Http\Controllers\Controller;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
-// Route::get('/oneToOneRelationship', [Controller::class, 'oneToOne']);
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/register', 'register')->name('register');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/loginRequest', 'loginRequest')->name('loginRequest');
+    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/account/verify/{token}', 'verifyAccount')->name('userVerify');
+});
 
-// Route::get('/oneToManyRelationship', [Controller::class, 'oneToOne']);
+Route::middleware(['is_admin'])->group(function () {
 
-Route::get('/AuthDashboard', [LoginRegisterController::class, 'AuthDashboard'])->name('AuthDashboard');
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/adminDashboard', 'dashboard')->name('adminDashboard');
 
-Route::get('/register', [LoginRegisterController::class, 'register'])->name('register');
+        Route::get('/deleteUserByAdmin/{id}', 'deleteUserByAdmin')->name('deleteUserByAdmin');
+        Route::get('/userInformationByAdmin', 'userInformationByAdmin')->name('userInformationByAdmin');
+        Route::get('/updateUserIndex/{id}', 'updateUserIndex')->name('updateUserIndex');
+        Route::post('/saveUpdate/{id}', 'saveUpdate')->name('saveUpdate');
 
-Route::post('/store', [LoginRegisterController::class, 'store'])->name('store');
+        Route::get('/updateUserRoleIndex/{id}', 'updateUserRoleIndex')->name('updateUserRoleIndex');
+        Route::post('/saveUpdateUserRole/{id}', 'saveUpdateUserRole')->name('saveUpdateUserRole');
 
-Route::get('/login', [LoginRegisterController::class, 'login'])->name('login');
+        Route::get('/userEnableIndex/{id}', 'userEnableIndex')->name('userEnableIndex');
+        Route::post('/saveUserEnableStatus/{id}', 'saveUserEnableStatus')->name('saveUserEnableStatus');
+    });
+});
+Route::middleware(['is_user'])->group(function () {
 
-Route::post('/loginUserAdmin', [LoginRegisterController::class, 'loginUserAdmin'])->name('loginUserAdmin');
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/userDashboard', 'userDashboard')->name('userDashboard')->middleware(['auth', 'is_verify_email']);
 
-Route::get('/dashboard', [LoginRegisterController::class, 'dashboard'])->name('dashboard');
-
-Route::get('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
-
-Route::get('/userViewInformation', [LoginRegisterController::class, 'userViewInformation'])->name('userViewInformation');
-
-Route::get('/userInformation', [LoginRegisterController::class, 'userInformation'])->name('userInformation');
+        Route::get('/deleteUserByUser/{id}', 'deleteUserByUser')->name('deleteUserByUser');
+        Route::get('/userViewInformation', 'userViewInformation')->name('userInformation');
+        Route::get('/update/{id}', 'update')->name('update');
+        Route::post('/storeUpdateUser/{id}', 'storeUpdateUser')->name('storeUpdateUser');
+    });
+});
